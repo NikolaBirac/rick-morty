@@ -1,0 +1,1 @@
+//paginacija sa karakterima
