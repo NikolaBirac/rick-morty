@@ -3,13 +3,14 @@ import charactersService from '../../services/dataService';
 import { CardView } from './CardView';
 import Pagination from "react-pagination-library";
 import "react-pagination-library/build/css/index.css";
+import {Loading} from '../partials/Loading';
 
 export default class MainPage extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            charactersArray: [],
+            charactersArray: null,
             currentPage: 1
         }
     }
@@ -40,18 +41,22 @@ export default class MainPage extends React.Component {
     render() {
         return (
             <div className="container">
-                <div className="characters-content">
-                    {this.state.charactersArray.map((character, i) => {
-                        return <CardView character={character} key={i}></CardView>
-                    })}
-                </div>
-
-                <Pagination
-                    currentPage={this.state.currentPage}
-                    totalPages={25}
-                    changeCurrentPage={this.changeCurrentPage}
-                    theme="square-i"
-                />
+                {!this.state.charactersArray ? <Loading /> : 
+                    <div>
+                        <div className="characters-content">
+                            {this.state.charactersArray.map((character, i) => {
+                                return <CardView character={character} key={i}></CardView>
+                            }) }
+                        </div>
+        
+                        <Pagination
+                            currentPage={this.state.currentPage}
+                            totalPages={25}
+                            changeCurrentPage={this.changeCurrentPage}
+                            theme="square-i"
+                        />
+                    </div>
+                }
             </div>
         )
     }
