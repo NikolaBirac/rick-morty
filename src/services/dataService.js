@@ -4,9 +4,14 @@ import Character from "../entities/constructor";
 
 class CharactersService {
 
-    getCharacters() {
-        return axios.get(apiURL)
-            .then(data => data.data.results)
+    pages = 4;
+
+    getCharacters(pageNumber) {
+        return axios.get(apiURL + '/?page=' + pageNumber)
+            .then(data => {
+
+                
+                return data.data.results})
             .then(characters => {
                 // console.log(characters);
                 return characters.map(singleCharacter => {
