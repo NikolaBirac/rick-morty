@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Switch } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import { Header } from './partials/Header';
+import MainPage from './mainPage/MainPage';
 
 class AppRouter extends Component {
   render() {
@@ -9,10 +10,10 @@ class AppRouter extends Component {
         <Header />
         <div>
           <Switch>
-            {/* <Route exact path="/home" component={Home} />
-            <Route path="/authors/:id" component={AuthorProfile} />
-            <Route exact path="/posts/new" component={NewPost} />
-            <Redirect from="/" to="/home" /> */}
+            <Route exact path="/" component={MainPage} />
+            {/* <Route path="/authors/:id" component={AuthorProfile} /> */}
+            {/* <Route exact path="/posts/new" component={NewPost} /> */}
+            {/* <Redirect from="/" to="/home" /> */}
           </Switch>
         </div>
       </div>
