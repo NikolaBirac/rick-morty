@@ -18,12 +18,11 @@ export default class MainPage extends React.Component {
     loadCharacters(pageNumber) {
         charactersService.getCharacters(pageNumber)
             .then(characters => {
-
                 this.setState({
-                    charactersArray: characters
-                })
-                
-            })
+                    charactersArray: characters.characters,
+                    pagesNumber: characters.pagesNumber
+                });
+            });
     }
 
     componentDidMount() {
@@ -51,7 +50,7 @@ export default class MainPage extends React.Component {
         
                         <Pagination
                             currentPage={this.state.currentPage}
-                            totalPages={25}
+                            totalPages={this.state.pagesNumber}
                             changeCurrentPage={this.changeCurrentPage}
                             theme="square-i"
                         />

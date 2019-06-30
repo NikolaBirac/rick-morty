@@ -5,19 +5,25 @@ import Character from "../entities/constructor";
 class CharactersService {
 
     getCharacters(pageNumber) {
+        let pagesNumber;
             return axios.get(apiURL + '/?page=' + pageNumber)
-            .then(data => data.data.results)
+            .then(data => {  
+                pagesNumber = data.data.info.pages;
+                return data.data.results
+            })
             .then(characters => {
-                // console.log(characters);
-                return characters.map(singleCharacter => {
-                // return console.log(singleCharacter);
+                return {
+                    characters: characters.map(singleCharacter => {
                     return new Character(singleCharacter.id, singleCharacter.name, singleCharacter.species, singleCharacter.gender, singleCharacter.location.name, singleCharacter.image)
-                })
+                    }), 
+                    pagesNumber: pagesNumber
+                }
             })
             .catch(error => {
                 alert(error)
             })
     }
+
 
 }
 
