@@ -1,1 +1,62 @@
-//paginacija sa karakterima
+import React from 'react';
+import charactersService from '../../services/dataService';
+import { CardView } from './CardView';
+import Pagination from "react-pagination-library";
+import "react-pagination-library/build/css/index.css";
+import {Loading} from '../partials/Loading';
+
+export default class MainPage extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            charactersArray: null,
+            currentPage: 1
+        }
+    }
+    
+    loadCharacters(pageNumber) {
+        charactersService.getCharacters(pageNumber)
+            .then(characters => {
+                this.setState({
+                    charactersArray: characters.characters,
+                    pagesNumber: characters.pagesNumber
+                });
+            });
+    }
+
+    componentDidMount() {
+        this.loadCharacters();
+    }   
+
+    changeCurrentPage = numPage => {
+        this.loadCharacters(numPage);
+        
+        this.setState({ currentPage: numPage });
+        //fetch a data
+        //or update a query to get data
+      };
+
+    render() {
+        return (
+            <div className="container">
+                {!this.state.charactersArray ? <Loading /> : 
+                    <div>
+                        <div className="characters-content">
+                            {this.state.charactersArray.map((character, i) => {
+                                return <CardView character={character} key={i}></CardView>
+                            }) }
+                        </div>
+        
+                        <Pagination
+                            currentPage={this.state.currentPage}
+                            totalPages={this.state.pagesNumber}
+                            changeCurrentPage={this.changeCurrentPage}
+                            theme="square-i"
+                        />
+                    </div>
+                }
+            </div>
+        )
+    }
+}

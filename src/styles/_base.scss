@@ -72,7 +72,9 @@ body {
     box-sizing: border-box ;
     font-family: $font-primary;
     background-image: url(../images/pozadina.jpg);
+    // background-color: rgb(177, 177, 177);
     background-size: 100vw 100vh;
+    background-attachment: fixed;
 }
 
 p {
@@ -88,13 +90,22 @@ p {
 
 .header {
     width: 100%;
-    position: relative;
+    // height: 20.6rem;
+    // position: relative;
+    margin-bottom: 3rem;
 }
 
 .logo {
-    position: absolute;
+    position: relative;
     top: 0;
     left: 50%;
     transform: translateX(-50%);
     width: 55rem;
+}
+
+
+
+.characters-content {
+    display: flex;
+    flex-wrap: wrap;
 }
