@@ -4,6 +4,7 @@ import { CardView } from './CardView';
 import Pagination from "react-pagination-library";
 import "react-pagination-library/build/css/index.css";
 import {Loading} from '../partials/Loading';
+import { Link } from 'react-router-dom';
 
 export default class MainPage extends React.Component {
     constructor(props) {
@@ -31,11 +32,12 @@ export default class MainPage extends React.Component {
 
     changeCurrentPage = numPage => {
         this.loadCharacters(numPage);
-        
         this.setState({ currentPage: numPage });
-        //fetch a data
-        //or update a query to get data
-      };
+    };
+
+    // loadCharacterDetails(id) {
+    //     ///
+    // }
 
     render() {
         return (
@@ -44,7 +46,11 @@ export default class MainPage extends React.Component {
                     <div>
                         <div className="characters-content">
                             {this.state.charactersArray.map((character, i) => {
-                                return <CardView character={character} key={i}></CardView>
+                                return (
+                                    <Link to={"/character/" + character.id} key={i} className="card">
+                                        <CardView character={character} ></CardView>
+                                    </Link>
+                                )
                             }) }
                         </div>
         
