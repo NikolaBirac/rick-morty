@@ -6,6 +6,7 @@
     border-radius: 3px;
     transition: .3s all;
     cursor: pointer;
+    position: relative;
     
     &:hover {
         background-color: rgba(46,204,113, 0.8);
@@ -15,11 +16,33 @@
         width: 100%;
     }
 
+    &__bookmark {
+      position: absolute;
+      top: 2rem;
+      right: 2rem;
+      width: 4rem;
+    }
+
     &__name {
         font-size: 2rem;
     }
 }
 
+
+.details {
+  margin: 0 auto;
+  background-color: rgba(255, 255, 255, 0.794);
+  width: 60%;
+  display: flex;
+
+  &__info {
+    padding: 3rem;
+  }
+
+  &__text {
+    margin-bottom: 1rem;
+  }
+}
 
 
 /// Loading 
