@@ -9,7 +9,7 @@
     position: relative;
     
     &:hover {
-        background-color: rgba(46,204,113, 0.8);
+      background-color: rgba(46,204,113, 0.8);
     }
 
     &__img {
@@ -21,6 +21,7 @@
       top: 2rem;
       right: 2rem;
       width: 4rem;
+      z-index: 1;
     }
 
     &__name {
@@ -31,7 +32,7 @@
 
 .details {
   margin: 0 auto;
-  background-color: rgba(255, 255, 255, 0.794);
+  background-color: rgba(255, 255, 255, .8);
   width: 60%;
   display: flex;
 
@@ -45,8 +46,83 @@
 }
 
 
-/// Loading 
 
+.bookmark {
+  display: inline-block;
+  position: relative;
+  // text-align: right;
+  // width: 5rem;
+   
+  &:hover .bookmark__box {
+    display: block;
+  }
+  
+  &__icon {
+    width: 50px;
+    cursor: pointer;
+  }
+
+  &__number {
+    font-size: 1.8rem;
+    position: absolute;
+    top: -3px;
+    right: -3px;
+    color: #fff;
+  }
+  
+  &__box {
+    z-index: 10;
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    border-radius: 10px;
+    overflow: hidden; 
+  }
+  
+  &__item {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    color: #fff;
+    border-bottom: 1px solid $color-grey;
+    background-color: rgba(0, 0, 0, .85);
+    position: relative;
+    
+    &-content {
+      display: flex;
+      padding: 1rem;
+      padding-right: 3rem;
+      width: 32rem;
+    }
+
+    &:hover {
+      background-color: rgba(0, 0, 0, .93);
+    }
+
+    // &:last-child {
+    //   // border-bottom: none;
+    // }
+  }
+
+  &__img {
+    width: 8rem;
+    border-radius: 40%;
+  }
+
+  &__text {
+    padding-left: 1.5rem;
+  }
+
+  &__garbage {
+    width: 2.3rem;
+    display: inline-block;
+    margin-right: 1.5rem;
+  }
+}
+
+
+/// Loading 
 .lds-ring {
     display: inline-block;
     position: absolute;

@@ -13,9 +13,11 @@ class CharactersService {
                 return data.data.results
             })
             .then(characters => {
+                let bookmarkedCharacters = this.getBookmarkedCharacters();
                 return {
                     characters: characters.map(singleCharacter => {
-                    return new Character(singleCharacter.id, singleCharacter.name, singleCharacter.image)
+                    let bookmarkState = bookmarkedCharacters.some(c => singleCharacter.id === c.id);         
+                    return new Character(singleCharacter.id, singleCharacter.name, singleCharacter.image, bookmarkState);
                     }), 
                     pagesNumber: pagesNumber
                 }
@@ -34,6 +36,21 @@ class CharactersService {
             .catch(error => {
                 alert(error);
             })
+    }
+
+    getBookmarkedCharacters() {
+        let bookmarkedCharacters = [];
+        try {
+            bookmarkedCharacters = JSON.parse(localStorage.getItem("bookmarkedCharacters"));
+            // console.log(bookmarkedCharacters);
+            
+            if (bookmarkedCharacters === null) {
+                bookmarkedCharacters = [];
+            }
+        } catch(e) {
+            console.log("Error getting bookmarked characters.");
+        }
+        return bookmarkedCharacters;
     }
 
 

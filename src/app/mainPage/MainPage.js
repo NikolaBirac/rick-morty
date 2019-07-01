@@ -1,10 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Pagination from "react-pagination-library";
 import "react-pagination-library/build/css/index.css";
 import charactersService from '../../services/dataService';
 import { CardView } from './CardView';
 import { Loading } from '../partials/Loading';
+import dataService from '../../services/dataService';
+import { Bookmark } from './Bookmark';
 
 export default class MainPage extends React.Component {
     constructor(props) {
@@ -26,6 +27,11 @@ export default class MainPage extends React.Component {
                     showLoading: false
                 });
             });
+
+        let bookmarkedCharacters = dataService.getBookmarkedCharacters();
+        this.setState({
+            bookmarkArray: bookmarkedCharacters
+        });
     }
 
     componentDidMount() {
@@ -40,6 +46,42 @@ export default class MainPage extends React.Component {
         }
     }   
 
+    handleBookmark = (character) => {        
+        character.bookmarkState = !character.bookmarkState;
+        let bookmarkedCharacters = dataService.getBookmarkedCharacters();
+        let removed = false;
+
+        for (let i = 0; i < bookmarkedCharacters.length; i++) {
+            if (character.id === bookmarkedCharacters[i].id) {
+                bookmarkedCharacters.splice(i, 1);
+                removed = true;
+                break;
+            }
+        }
+        
+        if (!removed) {
+            bookmarkedCharacters.push(character);
+        }
+
+        let charactersArray = this.state.charactersArray;
+
+        for (let i = 0; i < charactersArray.length; i++) {
+            if (character.id === charactersArray[i].id) {
+                charactersArray[i].bookmarkState = character.bookmarkState;
+                break;
+            }
+        }
+
+        this.setState({
+            charactersArray: charactersArray,
+            bookmarkArray: bookmarkedCharacters
+        });
+        
+        
+        localStorage.setItem("bookmarkedCharacters", JSON.stringify(bookmarkedCharacters));
+        return character.bookmarkState;
+    }
+
     changeCurrentPage = pageNum => {
         this.loadCharacters(pageNum);
         this.setState({ currentPage: pageNum });
@@ -51,12 +93,11 @@ export default class MainPage extends React.Component {
             <div className="container">
                 {this.state.showLoading ? <Loading /> : 
                     <div>
+                        <Bookmark characters={this.state.bookmarkArray} handleBookmark={this.handleBookmark}/>
                         <div className="characters-content">
                             {this.state.charactersArray.map((character, i) => {
                                 return (
-                                    <Link to={"/character/" + character.id} key={i} className="card">
-                                        <CardView character={character} ></CardView>
-                                    </Link>
+                                        <CardView key={i} handleBookmark={this.handleBookmark} character={character} ></CardView>
                                 )
                             }) }
                         </div>
@@ -73,3 +114,8 @@ export default class MainPage extends React.Component {
         )
     }
 }
+
+
+{/* <Link to={"/character/" + character.id} key={i} className="card">
+                                        <CardView character={character} ></CardView>
+                                    </Link> */}
