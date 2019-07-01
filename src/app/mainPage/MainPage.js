@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Pagination from "react-pagination-library";
 import "react-pagination-library/build/css/index.css";
 import charactersService from '../../services/dataService';

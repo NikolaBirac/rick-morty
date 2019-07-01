@@ -11,10 +11,8 @@ export const BookmarkItem = (props) => {
     return (
         <div className="bookmark__item">
             <Link to={"/character/" + props.character.id} className="bookmark__item-content">
-                {/* <div> */}
-                    <img src={props.character.image} className="bookmark__img"></img>
-                    <p className="bookmark__text">{props.character.name}</p>
-                {/* </div> */}
+                <img src={props.character.image} className="bookmark__img"></img>
+                <p className="bookmark__text">{props.character.name}</p>
             </Link>
                 <img src={garbage} onClick={handler} className="bookmark__garbage"></img>
             </div>
