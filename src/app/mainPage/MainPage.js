@@ -1,10 +1,10 @@
 import React from 'react';
-import charactersService from '../../services/dataService';
-import { CardView } from './CardView';
+import { Link } from 'react-router-dom';
 import Pagination from "react-pagination-library";
 import "react-pagination-library/build/css/index.css";
-import {Loading} from '../partials/Loading';
-import { Link } from 'react-router-dom';
+import charactersService from '../../services/dataService';
+import { CardView } from './CardView';
+import { Loading } from '../partials/Loading';
 
 export default class MainPage extends React.Component {
     constructor(props) {
@@ -12,7 +12,8 @@ export default class MainPage extends React.Component {
 
         this.state = {
             charactersArray: null,
-            currentPage: 1
+            currentPage: 1,
+            showLoading: true
         }
     }
     
@@ -21,28 +22,34 @@ export default class MainPage extends React.Component {
             .then(characters => {
                 this.setState({
                     charactersArray: characters.characters,
-                    pagesNumber: characters.pagesNumber
+                    pagesNumber: characters.pagesNumber,
+                    showLoading: false
                 });
             });
     }
 
     componentDidMount() {
-        this.loadCharacters();
+        let currentPage = JSON.parse(localStorage.getItem("currentPage"));
+        if (currentPage) {
+            this.loadCharacters(currentPage);
+            this.setState({
+                currentPage: currentPage
+            })
+        } else {
+            this.loadCharacters();
+        }
     }   
 
-    changeCurrentPage = numPage => {
-        this.loadCharacters(numPage);
-        this.setState({ currentPage: numPage });
+    changeCurrentPage = pageNum => {
+        this.loadCharacters(pageNum);
+        this.setState({ currentPage: pageNum });
+        localStorage.setItem("currentPage", JSON.stringify(pageNum));
     };
-
-    // loadCharacterDetails(id) {
-    //     ///
-    // }
 
     render() {
         return (
             <div className="container">
-                {!this.state.charactersArray ? <Loading /> : 
+                {this.state.showLoading ? <Loading /> : 
                     <div>
                         <div className="characters-content">
                             {this.state.charactersArray.map((character, i) => {

@@ -13,8 +13,6 @@ class AppRouter extends Component {
           <Switch>
             <Route exact path="/" component={MainPage} />
             <Route path="/character/:id" component={CharacterDetailsPage} />
-            {/* <Route exact path="/posts/new" component={NewPost} /> */}
-            {/* <Redirect from="/" to="/home" /> */}
           </Switch>
         </div>
       </div>

@@ -81,6 +81,11 @@ p {
     font-size: 1.8rem;
 }
 
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
 ::selection {
     background-color: $color-primary;
     color: $color-white;
