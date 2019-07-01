@@ -1,5 +1,6 @@
 import React from 'react';
 import garbage from '../../images/garbage.svg';
+import { Link } from 'react-router-dom';
 
 export const BookmarkItem = (props) => {
     
@@ -9,9 +10,13 @@ export const BookmarkItem = (props) => {
 
     return (
         <div className="bookmark__item">
-            <img src={props.character.image} className="bookmark__img"></img>
-            <p className="bookmark__text">{props.character.name}</p>
-            <img src={garbage} onClick={handler} className="bookmark__garbage"></img>
-        </div>
+            <Link to={"/character/" + props.character.id} className="bookmark__item-content">
+                {/* <div> */}
+                    <img src={props.character.image} className="bookmark__img"></img>
+                    <p className="bookmark__text">{props.character.name}</p>
+                {/* </div> */}
+            </Link>
+                <img src={garbage} onClick={handler} className="bookmark__garbage"></img>
+            </div>
     );
 }
