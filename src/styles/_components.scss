@@ -44,6 +44,64 @@
   }
 }
 
+.bookmark {
+  // display: inline-block;
+  position: relative;
+  // text-align: right;
+  // width: 5rem;
+
+  &:hover .bookmark__box {
+    display: block;
+  }
+
+  &__icon {
+    width: 50px;
+    cursor: pointer;
+  }
+
+  &__box {
+    z-index: 10;
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    border-radius: 2px;
+  }
+
+  &__item {
+    cursor: pointer;
+    display: flex;
+    padding: 1.5rem;
+    color: #fff;
+    border-bottom: 1px solid rgb(85, 85, 85);
+    background-color: rgba(0, 0, 0, .85);
+    position: relative;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, .93);
+    }
+
+    // &:last-child {
+    //   // border-bottom: none;
+    // }
+  }
+
+  &__img {
+    width: 7rem;
+  }
+
+  &__text {
+    padding-left: 1.5rem;
+  }
+
+  &__garbage {
+    position: absolute;
+    bottom: 1.5rem;
+    right: 2.5rem;
+    width: 2.5rem;
+  }
+}
+
 
 /// Loading 
 
