@@ -45,10 +45,6 @@ export default class CharacterDetailsPage extends React.Component {
                     </div>  
                 }
             </div>
-            // <div id={props.character.id}>
-            //     <img src={props.character.image} alt="logo" className="card__img"></img>
-            //     <p className="card__name">{props.character.name}</p>
-            // </div>
         )
     }
 }
