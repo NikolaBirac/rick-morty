@@ -6,6 +6,7 @@ import { CardView } from './CardView';
 import { Loading } from '../partials/Loading';
 import dataService from '../../services/dataService';
 import { Bookmark } from './Bookmark';
+import { SomethingWentWrong } from '../partials/SomethingWentWrong';
 
 export default class MainPage extends React.Component {
     constructor(props) {
@@ -14,7 +15,9 @@ export default class MainPage extends React.Component {
         this.state = {
             charactersArray: null,
             currentPage: 1,
-            showLoading: true
+            bookmarkArray: [],
+            showLoading: true,
+            error: false
         }
     }
     
@@ -24,14 +27,19 @@ export default class MainPage extends React.Component {
                 this.setState({
                     charactersArray: characters.characters,
                     pagesNumber: characters.pagesNumber,
-                    showLoading: false
+                    showLoading: false,
+                    error: false
+                });
+                let bookmarkedCharacters = dataService.getBookmarkedCharacters();
+                this.setState({
+                    bookmarkArray: bookmarkedCharacters
+                });
+            })
+            .catch(() => {
+                this.setState({
+                    error: true
                 });
             });
-
-        let bookmarkedCharacters = dataService.getBookmarkedCharacters();
-        this.setState({
-            bookmarkArray: bookmarkedCharacters
-        });
     }
 
     componentDidMount() {
@@ -89,32 +97,31 @@ export default class MainPage extends React.Component {
 
     render() {
         return (
-            <div className="container">
-                {this.state.showLoading ? <Loading /> : 
-                    <div>
-                        <Bookmark characters={this.state.bookmarkArray} handleBookmark={this.handleBookmark}/>
-                        <div className="characters-content">
-                            {this.state.charactersArray.map((character, i) => {
-                                return (
-                                    <CardView key={i} handleBookmark={this.handleBookmark} character={character} ></CardView>
-                                )
-                            }) }
-                        </div>
-        
-                        <Pagination
-                            currentPage={this.state.currentPage}
-                            totalPages={this.state.pagesNumber}
-                            changeCurrentPage={this.changeCurrentPage}
-                            theme="square-i"
-                        />
+            <div>
+                {this.state.error ? <SomethingWentWrong /> : 
+                    <div className="container">
+                        {this.state.showLoading ? <Loading /> : 
+                            <div>
+                                <Bookmark characters={this.state.bookmarkArray} handleBookmark={this.handleBookmark}/>
+                                <div className="characters-content">
+                                    {this.state.charactersArray.map((character, i) => {
+                                        return (
+                                            <CardView key={i} handleBookmark={this.handleBookmark} character={character} ></CardView>
+                                        )
+                                    }) }
+                                </div>
+                
+                                <Pagination
+                                    currentPage={this.state.currentPage}
+                                    totalPages={this.state.pagesNumber}
+                                    changeCurrentPage={this.changeCurrentPage}
+                                    theme="square-i"
+                                />
+                            </div>
+                        }
                     </div>
                 }
             </div>
         )
     }
 }
-
-
-{/* <Link to={"/character/" + character.id} key={i} className="card">
-                                        <CardView character={character} ></CardView>
-                                    </Link> */}

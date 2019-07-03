@@ -2,6 +2,7 @@
 import React from 'react';
 import dataService from '../../services/dataService';
 import { Loading } from '../partials/Loading';
+import { SomethingWentWrong } from '../partials/SomethingWentWrong';
 
 
 export default class CharacterDetailsPage extends React.Component {
@@ -9,7 +10,8 @@ export default class CharacterDetailsPage extends React.Component {
         super(props);
 
         this.state = {
-            character: null
+            character: null,
+            error: false
         }
     }
 
@@ -18,8 +20,12 @@ export default class CharacterDetailsPage extends React.Component {
             .then( character => {
                 this.setState({
                     character: character
+                });
+            })
+            .catch(() => {
+                this.setState({
+                    error: true
                 })
-                console.log(character);
             })
     }
 
@@ -29,20 +35,25 @@ export default class CharacterDetailsPage extends React.Component {
 
     render() {
         return (
-            <div className="container">
-                {!this.state.character ? <Loading /> : 
-                    <div className="details">
-                            <img src={this.state.character.image} alt="character" className="details__img"></img>
-                            <div className="details__info">
-                                <p className="details__text">Name: {this.state.character.name}</p>
-                                <p className="details__text">Gender: {this.state.character.gender}</p>
-                                <p className="details__text">Location: {this.state.character.location}</p>
-                                <p className="details__text">Species: {this.state.character.species}</p>
-                                <p className="details__text">Number of episodes: {this.state.character.episode}</p>
-                            </div>
-                    </div>  
+            <div>
+                { this.state.error ? <SomethingWentWrong /> :
+                    <div className="container">
+                        {!this.state.character ? <Loading /> : 
+                            <div className="details">
+                                    <img src={this.state.character.image} alt="character" className="details__img"></img>
+                                    <div className="details__info">
+                                        <p className="details__text">Name: {this.state.character.name}</p>
+                                        <p className="details__text">Gender: {this.state.character.gender}</p>
+                                        <p className="details__text">Location: {this.state.character.location}</p>
+                                        <p className="details__text">Species: {this.state.character.species}</p>
+                                        <p className="details__text">Number of episodes: {this.state.character.episode}</p>
+                                    </div>
+                            </div>  
+                        }
+                    </div>
                 }
             </div>
+            
         )
     }
 }

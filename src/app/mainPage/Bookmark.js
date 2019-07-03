@@ -7,7 +7,7 @@ export const Bookmark = (props) => {
     return (
         <div className="bookmark">
             <div className="bookmark__container">
-                <img src={icon} className="bookmark__icon"></img>
+                <img src={icon} className="bookmark__icon" alt="bookmark"></img>
                 <p className="bookmark__number">{props.characters.length}</p>
                 <div className="bookmark__box">
                     { props.characters.length === 0 ? 

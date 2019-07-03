@@ -21,10 +21,7 @@ class CharactersService {
                     }), 
                     pagesNumber: pagesNumber
                 }
-            })
-            .catch(error => {
-                alert(error);
-            })
+            });
     }
 
     getCharaterDetails(id) {
@@ -32,9 +29,6 @@ class CharactersService {
             .then( data => data.data)
             .then( character => {
                 return new CharacterDetails(character.id, character.name, character.species, character.gender, character.location.name, character.image, character.episode.length)
-            })
-            .catch(error => {
-                alert(error);
             })
     }
 
