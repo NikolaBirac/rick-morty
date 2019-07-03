@@ -77,7 +77,6 @@ export default class MainPage extends React.Component {
             bookmarkArray: bookmarkedCharacters
         });
         
-        
         localStorage.setItem("bookmarkedCharacters", JSON.stringify(bookmarkedCharacters));
         return character.bookmarkState;
     }
@@ -97,7 +96,7 @@ export default class MainPage extends React.Component {
                         <div className="characters-content">
                             {this.state.charactersArray.map((character, i) => {
                                 return (
-                                        <CardView key={i} handleBookmark={this.handleBookmark} character={character} ></CardView>
+                                    <CardView key={i} handleBookmark={this.handleBookmark} character={character} ></CardView>
                                 )
                             }) }
                         </div>

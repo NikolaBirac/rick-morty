@@ -23,7 +23,7 @@ class CharactersService {
                 }
             })
             .catch(error => {
-                alert(error)
+                alert(error);
             })
     }
 
@@ -42,13 +42,12 @@ class CharactersService {
         let bookmarkedCharacters = [];
         try {
             bookmarkedCharacters = JSON.parse(localStorage.getItem("bookmarkedCharacters"));
-            // console.log(bookmarkedCharacters);
             
             if (bookmarkedCharacters === null) {
                 bookmarkedCharacters = [];
             }
         } catch(e) {
-            console.log("Error getting bookmarked characters.");
+            alert("Error getting bookmarked characters.");
         }
         return bookmarkedCharacters;
     }

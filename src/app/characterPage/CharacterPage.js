@@ -32,9 +32,7 @@ export default class CharacterDetailsPage extends React.Component {
             <div className="container">
                 {!this.state.character ? <Loading /> : 
                     <div className="details">
-                            <div>
-                                <img src={this.state.character.image} alt="logo"></img>
-                            </div>
+                            <img src={this.state.character.image} alt="character" className="details__img"></img>
                             <div className="details__info">
                                 <p className="details__text">Name: {this.state.character.name}</p>
                                 <p className="details__text">Gender: {this.state.character.gender}</p>

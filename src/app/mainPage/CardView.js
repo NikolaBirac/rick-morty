@@ -13,7 +13,7 @@ export const CardView = (props) => {
             <div id={props.character.id} className="card">
                 {!props.character.bookmarkState ? <img src={icon} onClick={handler} className="card__bookmark" alt="bookmark"></img> : <img src={icon1} onClick={handler} className="card__bookmark" alt="bookmark"></img> }
 
-                <Link to={"/character/" + props.character.id} className="card">
+                <Link to={"/character/" + props.character.id} >
                     <img src={props.character.image} alt="logo" className="card__img"></img>
                     <p className="card__name">{props.character.name}</p>
                 </Link>

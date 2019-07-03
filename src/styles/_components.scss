@@ -1,3 +1,28 @@
+.logo {
+  position: relative;
+  top: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 54rem;
+
+  @include respond(tab-port) {
+    width: 47rem;
+  }
+
+  @include respond(phone) {
+    width: 38rem;    
+  }
+
+  @include respond(phone-small) {
+    width: 33rem;    
+  }
+}
+
+.characters-content {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .card {
     background-color: rgba(255, 255, 255, 0.6);
     width: 23%;
@@ -7,6 +32,23 @@
     transition: .3s all;
     cursor: pointer;
     position: relative;
+    text-align: center;
+
+    @include respond(tab-port) {
+      width: 31.3%;
+      margin: 1%;
+    }
+
+    @include respond(phone) {
+      width: 46%;
+      margin: 2%;
+      padding: 3%;
+    }
+
+    @include respond(phone-small) {
+      width: 90%;
+      margin: 3% 5%;
+    }
     
     &:hover {
       background-color: rgba(46,204,113, 0.8);
@@ -25,7 +67,12 @@
     }
 
     &__name {
-        font-size: 2rem;
+        font-size: 2.1rem;
+        margin-top: 6px;
+
+        @include respond(phone) {
+          font-size: 2.3rem;
+        }
     }
 }
 
@@ -33,32 +80,74 @@
 .details {
   margin: 0 auto;
   background-color: rgba(255, 255, 255, .8);
-  width: 60%;
+  width: 65%;
   display: flex;
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+  border-radius: 4px;
+  overflow: hidden;
+
+  @include respond(tab-port) {
+    width: 80%;     
+  }
+
+  @include respond(phone) {
+    width: 100%;
+  }
+
+  @include respond(phone-small) {
+    display: block;
+    width: 80%;
+  }
+
+  &__img {
+    width: 45%;
+
+    @include respond(phone-small) {
+      width: 100%;
+    }
+  }
 
   &__info {
     padding: 3rem;
+    flex-grow: 1;
+
+    @include respond(tab-port) {
+      padding: 2rem;      
+    }
   }
 
   &__text {
     margin-bottom: 1rem;
+
+    @include respond(tab-port) {
+      width: 80%;    
+      font-size: 1.9rem; 
+    }
+
+    @include respond(phone-small) {
+      margin-bottom: 5px;      
+    }
   }
 }
 
 
 
 .bookmark {
-  display: inline-block;
   position: relative;
-  // text-align: right;
-  // width: 5rem;
-   
-  &:hover .bookmark__box {
-    display: block;
+  text-align: right;
+
+  &__container {
+    display: inline-block;
+    margin-right: 2rem;
+
+    &:hover .bookmark__box {
+      display: block;
+    }
   }
   
   &__icon {
-    width: 50px;
+    width: 5rem;
     cursor: pointer;
   }
 
@@ -66,16 +155,17 @@
     font-size: 1.8rem;
     position: absolute;
     top: -3px;
-    right: -3px;
-    color: #fff;
+    right: 17px;
+    color: $color-white;
   }
   
   &__box {
+    text-align: left;
     z-index: 10;
     display: none;
     position: absolute;
     top: 100%;
-    left: 0;
+    right: 0;
     border-radius: 10px;
     overflow: hidden; 
   }
@@ -84,7 +174,7 @@
     cursor: pointer;
     display: flex;
     justify-content: space-between;
-    color: #fff;
+    color: $color-white;
     border-bottom: 1px solid $color-grey;
     background-color: rgba(0, 0, 0, .85);
     position: relative;
@@ -99,10 +189,6 @@
     &:hover {
       background-color: rgba(0, 0, 0, .93);
     }
-
-    // &:last-child {
-    //   // border-bottom: none;
-    // }
   }
 
   &__img {
@@ -139,10 +225,10 @@
     width: 70px;
     height: 70px;
     margin: 6px;
-    border: 6px solid #fff;
+    border: 6px solid $color-white;
     border-radius: 50%;
     animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-    border-color: #fff transparent transparent transparent;
+    border-color: $color-white transparent transparent transparent;
   }
   .lds-ring div:nth-child(1) {
     animation-delay: -0.45s;
