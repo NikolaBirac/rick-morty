@@ -18,6 +18,7 @@
   }
 }
 
+// Characters content ad card list
 .characters-content {
   display: flex;
   flex-wrap: wrap;
@@ -76,7 +77,7 @@
     }
 }
 
-
+// Characters details page
 .details {
   margin: 0 auto;
   background-color: rgba(255, 255, 255, .8);
@@ -132,7 +133,7 @@
 }
 
 
-
+// Bookmark
 .bookmark {
   position: relative;
   text-align: right;
@@ -211,6 +212,7 @@
   }
 }
 
+// Service error
 .serviceError {
   position: relative;
   color: $color-white;

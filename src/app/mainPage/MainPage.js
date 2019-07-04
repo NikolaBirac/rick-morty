@@ -1,7 +1,6 @@
 import React from 'react';
 import Pagination from "react-pagination-library";
 import "react-pagination-library/build/css/index.css";
-
 import charactersService from '../../services/dataService';
 import dataService from '../../services/dataService';
 import { CardView } from './CardView';

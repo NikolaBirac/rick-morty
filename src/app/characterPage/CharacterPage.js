@@ -1,10 +1,8 @@
 
 import React from 'react';
-
 import dataService from '../../services/dataService';
 import { Loading } from '../partials/Loading';
 import { SomethingWentWrong } from '../partials/SomethingWentWrong';
-
 
 export default class CharacterDetailsPage extends React.Component {
     constructor(props) {
@@ -54,7 +52,6 @@ export default class CharacterDetailsPage extends React.Component {
                     </div>
                 }
             </div>
-            
         )
     }
 }

@@ -45,8 +45,6 @@ class CharactersService {
         }
         return bookmarkedCharacters;
     }
-
-
 }
 
 export default new CharactersService();
