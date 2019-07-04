@@ -184,6 +184,10 @@
       padding: 1rem;
       padding-right: 3rem;
       width: 32rem;
+
+      @include respond(phone-small) {
+        width: 29rem;           
+      }
     }
 
     &:hover {

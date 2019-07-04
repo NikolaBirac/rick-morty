@@ -1,10 +1,11 @@
 import React from 'react';
 import Pagination from "react-pagination-library";
 import "react-pagination-library/build/css/index.css";
+
 import charactersService from '../../services/dataService';
+import dataService from '../../services/dataService';
 import { CardView } from './CardView';
 import { Loading } from '../partials/Loading';
-import dataService from '../../services/dataService';
 import { Bookmark } from './Bookmark';
 import { SomethingWentWrong } from '../partials/SomethingWentWrong';
 
@@ -59,6 +60,7 @@ export default class MainPage extends React.Component {
         let bookmarkedCharacters = dataService.getBookmarkedCharacters();
         let removed = false;
 
+        // remove character from bookmark array
         for (let i = 0; i < bookmarkedCharacters.length; i++) {
             if (character.id === bookmarkedCharacters[i].id) {
                 bookmarkedCharacters.splice(i, 1);
@@ -67,12 +69,14 @@ export default class MainPage extends React.Component {
             }
         }
         
+        // add character in bookmark array
         if (!removed) {
             bookmarkedCharacters.push(character);
         }
+        localStorage.setItem("bookmarkedCharacters", JSON.stringify(bookmarkedCharacters));
 
+        // change character bookmark property in state
         let charactersArray = this.state.charactersArray;
-
         for (let i = 0; i < charactersArray.length; i++) {
             if (character.id === charactersArray[i].id) {
                 charactersArray[i].bookmarkState = character.bookmarkState;
@@ -84,9 +88,6 @@ export default class MainPage extends React.Component {
             charactersArray: charactersArray,
             bookmarkArray: bookmarkedCharacters
         });
-        
-        localStorage.setItem("bookmarkedCharacters", JSON.stringify(bookmarkedCharacters));
-        return character.bookmarkState;
     }
 
     changeCurrentPage = pageNum => {
@@ -98,28 +99,30 @@ export default class MainPage extends React.Component {
     render() {
         return (
             <div>
-                {this.state.error ? <SomethingWentWrong /> : 
-                    <div className="container">
-                        {this.state.showLoading ? <Loading /> : 
-                            <div>
-                                <Bookmark characters={this.state.bookmarkArray} handleBookmark={this.handleBookmark}/>
-                                <div className="characters-content">
-                                    {this.state.charactersArray.map((character, i) => {
-                                        return (
-                                            <CardView key={i} handleBookmark={this.handleBookmark} character={character} ></CardView>
-                                        )
-                                    }) }
-                                </div>
-                
-                                <Pagination
-                                    currentPage={this.state.currentPage}
-                                    totalPages={this.state.pagesNumber}
-                                    changeCurrentPage={this.changeCurrentPage}
-                                    theme="square-i"
-                                />
-                            </div>
-                        }
-                    </div>
+                {this.state.error ? <SomethingWentWrong /> : (
+                        <div className="container">
+                            {this.state.showLoading ? <Loading /> : (
+                                    <div>
+                                        <Bookmark characters={this.state.bookmarkArray} handleBookmark={this.handleBookmark}/>
+                                        <div className="characters-content">
+                                            {this.state.charactersArray.map((character, i) => {
+                                                return (
+                                                    <CardView key={i} handleBookmark={this.handleBookmark} character={character} ></CardView>
+                                                )
+                                            }) }
+                                        </div>
+                        
+                                        <Pagination
+                                            currentPage={this.state.currentPage}
+                                            totalPages={this.state.pagesNumber}
+                                            changeCurrentPage={this.changeCurrentPage}
+                                            theme="square-fill"
+                                        />
+                                    </div>
+                                )
+                            }
+                        </div>
+                    )
                 }
             </div>
         )
