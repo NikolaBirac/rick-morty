@@ -91,7 +91,7 @@ export default class MainPage extends React.Component {
 
     changeCurrentPage = pageNum => {
         this.loadCharacters(pageNum);
-        this.setState({ currentPage: pageNum });
+        this.setState({ currentPage: pageNum, showLoading: true });
         localStorage.setItem("currentPage", JSON.stringify(pageNum));
     };
 
