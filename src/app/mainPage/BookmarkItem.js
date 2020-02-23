@@ -9,12 +9,12 @@ export const BookmarkItem = (props) => {
     }
 
     return (
-        <div className="bookmark__item">
-            <Link to={"/character/" + props.character.id} className="bookmark__item-content">
-                <img src={props.character.image} className="bookmark__img" alt={props.character.name}></img>
-                <p className="bookmark__text">{props.character.name}</p>
+        <div className="dropdown__item">
+            <Link to={"/character/" + props.character.id} className="dropdown__item-content">
+                <img src={props.character.image} className="dropdown__img" alt={props.character.name}></img>
+                <p className="dropdown__text">{props.character.name}</p>
             </Link>
-                <img src={garbage} onClick={handler} className="bookmark__garbage" alt="trash"></img>
+                <img src={garbage} onClick={handler} className="dropdown__garbage" alt="trash"></img>
             </div>
     );
 }

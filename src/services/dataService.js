@@ -32,6 +32,37 @@ class CharactersService {
             })
     }
 
+    filterCharacters(filters) {
+        let query = "";
+        
+        if (filters.length > 1) {
+            filters.map(filter => {
+                return query = query + `${filter.filter}=${filter.value}&`
+            })
+        } else {
+            // query = `${query}${filters.filter}=${filters.value}`;
+            query = query + filters.filter + '=' + filters.value;
+        }
+        // ?name=rick&status=alive
+        
+        let pagesNumber;
+        return axios.get(apiURL + `?${query}`)
+        .then(data => {  
+            pagesNumber = data.data.info.pages;
+            return data.data.results
+        })
+        .then(characters => {
+                let bookmarkedCharacters = this.getBookmarkedCharacters();
+                return {
+                    characters: characters.map(singleCharacter => {
+                    let bookmarkState = bookmarkedCharacters.some(c => singleCharacter.id === c.id);         
+                    return new Character(singleCharacter.id, singleCharacter.name, singleCharacter.image, bookmarkState);
+                    }), 
+                    pagesNumber: pagesNumber
+                }
+            });
+    }
+
     getBookmarkedCharacters() {
         let bookmarkedCharacters = [];
         try {

@@ -10,11 +10,11 @@
   }
 
   @include respond(phone) {
-    width: 38rem;    
+    width: 38rem;
   }
 
   @include respond(phone-small) {
-    width: 33rem;    
+    width: 33rem;
   }
 }
 
@@ -25,56 +25,56 @@
 }
 
 .card {
-    background-color: rgba(255, 255, 255, 0.6);
-    width: 23%;
-    margin: 1%;
-    padding: 1.5%;
-    border-radius: 3px;
-    transition: .3s all;
-    cursor: pointer;
-    position: relative;
-    text-align: center;
+  background-color: rgba(255, 255, 255, 0.6);
+  width: 23%;
+  margin: 1%;
+  padding: 1.5%;
+  border-radius: 3px;
+  transition: .3s all;
+  cursor: pointer;
+  position: relative;
+  text-align: center;
 
-    @include respond(tab-port) {
-      width: 31.3%;
-      margin: 1%;
-    }
+  @include respond(tab-port) {
+    width: 31.3%;
+    margin: 1%;
+  }
+
+  @include respond(phone) {
+    width: 46%;
+    margin: 2%;
+    padding: 3%;
+  }
+
+  @include respond(phone-small) {
+    width: 90%;
+    margin: 3% 5%;
+  }
+
+  &:hover {
+    background-color: rgba(46, 204, 113, 0.8);
+  }
+
+  &__img {
+    width: 100%;
+  }
+
+  &__bookmark {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    width: 4rem;
+    z-index: 1;
+  }
+
+  &__name {
+    font-size: 2.1rem;
+    margin-top: 6px;
 
     @include respond(phone) {
-      width: 46%;
-      margin: 2%;
-      padding: 3%;
+      font-size: 2.3rem;
     }
-
-    @include respond(phone-small) {
-      width: 90%;
-      margin: 3% 5%;
-    }
-    
-    &:hover {
-      background-color: rgba(46,204,113, 0.8);
-    }
-
-    &__img {
-        width: 100%;
-    }
-
-    &__bookmark {
-      position: absolute;
-      top: 2rem;
-      right: 2rem;
-      width: 4rem;
-      z-index: 1;
-    }
-
-    &__name {
-        font-size: 2.1rem;
-        margin-top: 6px;
-
-        @include respond(phone) {
-          font-size: 2.3rem;
-        }
-    }
+  }
 }
 
 // Characters details page
@@ -89,7 +89,7 @@
   overflow: hidden;
 
   @include respond(tab-port) {
-    width: 80%;     
+    width: 80%;
   }
 
   @include respond(phone) {
@@ -114,7 +114,7 @@
     flex-grow: 1;
 
     @include respond(tab-port) {
-      padding: 2rem;      
+      padding: 2rem;
     }
   }
 
@@ -122,31 +122,37 @@
     margin-bottom: 1rem;
 
     @include respond(tab-port) {
-      width: 80%;    
-      font-size: 1.9rem; 
+      width: 80%;
+      font-size: 1.9rem;
     }
 
     @include respond(phone-small) {
-      margin-bottom: 5px;      
+      margin-bottom: 5px;
     }
   }
 }
 
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 2rem;
+}
 
 // Bookmark
 .bookmark {
   position: relative;
-  text-align: right;
+  // text-align: right;
 
   &__container {
     display: inline-block;
     margin-right: 2rem;
 
-    &:hover .bookmark__box {
+    &:hover .dropdown {
       display: block;
     }
   }
-  
+
   &__icon {
     width: 5rem;
     cursor: pointer;
@@ -159,18 +165,152 @@
     right: 17px;
     color: $color-white;
   }
-  
-  &__box {
-    text-align: left;
-    z-index: 10;
+
+  // &__box {
+  //   text-align: left;
+  //   z-index: 10;
+  //   display: none;
+  //   position: absolute;
+  //   top: 100%;
+  //   right: 0;
+  //   border-radius: 10px;
+  //   overflow: hidden; 
+  // }
+
+  // &__item {
+  //   cursor: pointer;
+  //   display: flex;
+  //   justify-content: space-between;
+  //   color: $color-white;
+  //   border-bottom: 1px solid $color-grey;
+  //   background-color: rgba(0, 0, 0, .85);
+  //   position: relative;
+
+  //   &-content {
+  //     display: flex;
+  //     padding: 1rem;
+  //     padding-right: 3rem;
+  //     width: 32rem;
+
+  //     @include respond(phone-small) {
+  //       width: 29rem;           
+  //     }
+  //   }
+
+  //   &:hover {
+  //     background-color: rgba(0, 0, 0, .93);
+  //   }
+  // }
+
+  // &__img {
+  //   width: 8rem;
+  //   border-radius: 40%;
+  // }
+
+  // &__text {
+  //   padding-left: 1.5rem;
+  // }
+
+  // &__garbage {
+  //   width: 2.3rem;
+  //   display: inline-block;
+  //   margin-right: 1.5rem;
+  // }
+}
+
+.btn {
+  background-color: $color-primary;
+  padding: 6px 12px;
+  color: #000;
+  border-radius: 200px;
+  font-size: 1.5rem;
+  font-weight: 300;
+  margin-right: 5px;
+  cursor: pointer;
+
+  &:first-of-type {
+    margin-left: 5px;
+  }
+}
+
+.filters {
+  display: flex;
+  align-items: center;
+  font-size: 1.6rem;
+
+  &__filter {
+    position: relative;
+    // cursor: pointer;
+    width: 36rem;
+  }
+
+  &__title {
+    width: 10rem;
+    text-align: center;
+    background-color: $color-primary;
+    color: $color-white;
+    font-size: 1.7rem;
+    border-radius: 20rem;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 3rem;
+  }
+
+  &:hover .dropdown {
+    display: block;
+  }
+
+  & .dropdown__item {
+    cursor: initial;
+  }
+
+  &__applied {
+    color: #fff;
+    display: flex;
+  }
+
+  &__single {
+    box-sizing: border-box;
+    background-color: rgba(194, 194, 194, 0.774);
+    padding: 1rem 3rem;
+    border-radius: 20rem;
+    height: 40px;
+    margin-right: 1rem;
+    position: relative;
+    // transition: .8s all;
+
+    &:hover .filters__icon {
+      display: block;
+    }
+  }
+
+  &__icon {
     display: none;
     position: absolute;
-    top: 100%;
-    right: 0;
-    border-radius: 10px;
-    overflow: hidden; 
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 35px;
+    cursor: pointer;
   }
-  
+}
+
+.dropdown {
+  text-align: left;
+  z-index: 10;
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  border-radius: 10px;
+  overflow: hidden;
+
+  &-filter {
+    left: 0;
+  }
+
   &__item {
     cursor: pointer;
     display: flex;
@@ -179,7 +319,7 @@
     border-bottom: 1px solid $color-grey;
     background-color: rgba(0, 0, 0, .85);
     position: relative;
-    
+
     &-content {
       display: flex;
       padding: 1rem;
@@ -187,7 +327,7 @@
       width: 32rem;
 
       @include respond(phone-small) {
-        width: 29rem;           
+        width: 29rem;
       }
     }
 
@@ -223,7 +363,7 @@
   margin-top: 3rem;
 
   @include respond(phone) {
-    flex-direction: column;   
+    flex-direction: column;
   }
 
   &__img {
@@ -232,57 +372,64 @@
 
     @include respond(phone) {
       margin-right: 0;
-      margin-bottom: 1.5rem;      
+      margin-bottom: 1.5rem;
     }
   }
-  
+
   &__text {
     text-align: left;
     font-size: 4rem;
 
     @include respond(phone) {
-      font-size: 3rem;      
+      font-size: 3rem;
     }
   }
 }
 
+
+
 /// Loading 
 .lds-ring {
-    display: inline-block;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 64px;
-    height: 64px;
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 64px;
+  height: 64px;
+}
+
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  margin: 6px;
+  border: 6px solid $color-white;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: $color-white transparent transparent transparent;
+}
+
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
   }
-  .lds-ring div {
-    box-sizing: border-box;
-    display: block;
-    position: absolute;
-    width: 70px;
-    height: 70px;
-    margin: 6px;
-    border: 6px solid $color-white;
-    border-radius: 50%;
-    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-    border-color: $color-white transparent transparent transparent;
+
+  100% {
+    transform: rotate(360deg);
   }
-  .lds-ring div:nth-child(1) {
-    animation-delay: -0.45s;
-  }
-  .lds-ring div:nth-child(2) {
-    animation-delay: -0.3s;
-  }
-  .lds-ring div:nth-child(3) {
-    animation-delay: -0.15s;
-  }
-  @keyframes lds-ring {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
-  
+}

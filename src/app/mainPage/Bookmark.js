@@ -9,11 +9,11 @@ export const Bookmark = (props) => {
             <div className="bookmark__container">
                 <img src={icon} className="bookmark__icon" alt="bookmark"></img>
                 <p className="bookmark__number">{props.characters.length}</p>
-                <div className="bookmark__box">
+                <div className="dropdown">
                     { props.characters.length === 0 ? 
-                        <div className="bookmark__item">
-                            <div className="bookmark__item-content">
-                                <p className="bookmark__text">No bookmarked characters</p>
+                        <div className="dropdown__item">
+                            <div className="dropdown__item-content">
+                                <p className="dropdown__text">No bookmarked characters</p>
                             </div>
                         </div> : 
                     props.characters.map((character, i) => {
