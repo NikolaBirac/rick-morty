@@ -5,8 +5,9 @@
 }
 
 // Variables
-$font-primary: BentonSans, sans-serif;
-$color-primary: rgb(46,204,113);
+$font-primary: BentonSans,
+sans-serif;
+$color-primary: rgb(46, 204, 113);
 $color-black: rgb(44, 44, 44);
 $color-grey: rgb(85, 85, 85);
 $color-white: #fff;
@@ -14,30 +15,49 @@ $color-white: #fff;
 // Responsive breakpoints
 @mixin respond($breakpoint) {
 
-    @if $breakpoint == phone-small {
-        @media only screen and (max-width: 25em) { //400px
+    @if $breakpoint==phone-small {
+        @media only screen and (max-width: 25em) {
+            //400px
             @content
-        };
+        }
+
+        ;
     }
-    @if $breakpoint == phone {
-        @media only screen and (max-width: 37.5em) { //600px
+
+    @if $breakpoint==phone {
+        @media only screen and (max-width: 37.5em) {
+            //600px
             @content
-        };
+        }
+
+        ;
     }
-    @if $breakpoint == tab-port {
-        @media only screen and (max-width: 56.25em) { //900
+
+    @if $breakpoint==tab-port {
+        @media only screen and (max-width: 56.25em) {
+            //900
             @content
-        };
+        }
+
+        ;
     }
-    @if $breakpoint == tab-land {   
-        @media only screen and (max-width: 75em) {  //1200
+
+    @if $breakpoint==tab-land {
+        @media only screen and (max-width: 75em) {
+            //1200
             @content
-        };
+        }
+
+        ;
     }
-    @if $breakpoint == big-desktop {
-        @media only screen and (min-width: 112.5em) {   //1800px
+
+    @if $breakpoint==big-desktop {
+        @media only screen and (min-width: 112.5em) {
+            //1800px
             @content
-        };
+        }
+
+        ;
     }
 }
 
@@ -65,12 +85,12 @@ html {
     }
 
     @include respond(big-desktop) {
-        font-size: 75%;         //1rem = 12px
+        font-size: 75%; //1rem = 12px
     }
 }
 
 body {
-    box-sizing: border-box ;
+    box-sizing: border-box;
     font-family: $font-primary;
     background-image: url(../images/pozadina.jpg);
     background-size: 100vw 100vh;
@@ -93,4 +113,51 @@ a {
 
 .header {
     width: 100%;
+    text-align: center;
+
+    & .nav {
+        color: #fff;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 1.6rem;
+        font-family: Arial, Helvetica, sans-serif;
+        padding: 3rem 2rem 1rem;
+
+        &__group {
+            display: flex;
+
+        }
+
+        &__link {
+            list-style: none;
+            margin-right: 3rem;
+
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+
+        &__icon {
+            width: 2.7rem;
+        }
+    }
+}
+
+.footer {
+    margin: 4rem 0;
+    text-align: center;
+    
+    &__text {
+        color: rgb(189, 189, 189);
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 1.4rem;
+        
+        &-name {
+            color:$color-white;
+            font-weight: bold;
+            border-bottom: 1px solid $color-primary;
+            padding-bottom: 1px;
+        }
+    }
 }

@@ -1,8 +1,9 @@
 .logo {
-  position: relative;
+  // position: relative;
   top: 5px;
-  left: 50%;
-  transform: translateX(-50%);
+  // left: 50%;
+  // transform: translateX(-50%);
+  text-align: center;
   width: 54rem;
 
   @include respond(tab-port) {
@@ -349,6 +350,39 @@
     width: 2.3rem;
     display: inline-block;
     margin-right: 1.5rem;
+  }
+}
+
+.about {
+  margin: 5rem 0;
+  padding: 0 15%;
+  color: $color-white;
+  font-family: Arial, Helvetica, sans-serif;
+  align-items: center;
+
+
+  &__group {
+    margin: 3.5rem 0;
+    background-color: rgba(0, 0, 0, 0.65);
+    padding: 3.5rem 4rem;
+  }
+
+  &__heading {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+  }
+
+  &__text {
+    margin-bottom: 1rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__link {
+    color: $color-primary;
+    border-bottom: 1px solid $color-primary;
   }
 }
 
