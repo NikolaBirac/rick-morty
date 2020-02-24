@@ -93,22 +93,21 @@ export default class MainPage extends React.Component {
     }
 
     filterCharacters = (filter,value) => {
+        this.setState({
+            showLoading: true
+        });
+
         let filters = [];
+        filters = [...this.state.filters];
 
         if (this.state.filters.length >= 1) {  
-            filters = [...this.state.filters];
-            const sameFilter = filters.find(el => el.filter === filter);
-
-            if (sameFilter) {
-                filters.map(el => el.filter === filter ? el.value = value : "");
-            } else {
-                filters.push({filter, value});
-            }
+            const sameFilterIndex = filters.findIndex(el => el.filter === filter);
+            if (sameFilterIndex > -1) filters[sameFilterIndex].value = value
+            else filters.push({filter, value});
         } else {
-            filters = [...this.state.filters];
             filters.push({filter, value});
         }
-                
+          
         charactersService.filterCharacters(filters)
             .then(characters => {
                 this.setState({
@@ -126,31 +125,44 @@ export default class MainPage extends React.Component {
             .catch(() => {
                 this.setState({
                     error: true
-                });
             });
+        });
     }
 
     removeFilter = (filter) => {
-        // const filters = this.state.filters.filter( el => el.filter !== filter);
-        // charactersService.filterCharacters(filters)
-        //     .then(characters => {
-        //         this.setState({
-        //             charactersArray: characters.characters,
-        //             showLoading: false,
-        //             error: false,
-        //             filters: filters,
-        //             pagesNumber: characters.pagesNumber
-        //         });
-        //         let bookmarkedCharacters = dataService.getBookmarkedCharacters();
-        //         this.setState({
-        //             bookmarkArray: bookmarkedCharacters
-        //         });
-        //     })
-        //     .catch(() => {
-        //         this.setState({
-        //             error: true
-        //         });
-        //     });
+        this.setState({
+            showLoading: true
+        });
+
+        const filters = this.state.filters.filter( el => el.filter !== filter);
+
+        if (filters.length === 0) {
+            this.setState({
+                pagesNumber: 0,
+                filters: []
+            })
+            this.loadCharacters();
+        } else {
+            charactersService.filterCharacters(filters)
+                .then(characters => {
+                    this.setState({
+                        charactersArray: characters.characters,
+                        showLoading: false,
+                        error: false,
+                        filters: filters,
+                        pagesNumber: characters.pagesNumber
+                    });
+                    let bookmarkedCharacters = dataService.getBookmarkedCharacters();
+                    this.setState({
+                        bookmarkArray: bookmarkedCharacters
+                    });
+                })
+                .catch(() => {
+                    this.setState({
+                        error: true
+                    });
+                });
+        }
     }
 
     changeCurrentPage = pageNum => {
@@ -160,36 +172,34 @@ export default class MainPage extends React.Component {
     };
 
     render() {
-        return (
+        return (    
             <div>
                 {this.state.error ? <SomethingWentWrong /> : (
                         <div className="container">
-                            {this.state.showLoading ? <Loading /> : (
-                                    <div>
-                                        <div className="toolbar">
-                                            <Filter filterCharacters={this.filterCharacters} filters={this.state.filters} removeFilter={this.removeFilter}/>
-                                            <Bookmark characters={this.state.bookmarkArray} handleBookmark={this.handleBookmark}/>
-                                        </div>
-                                        <div className="characters-content">
-                                            {this.state.charactersArray.map((character, i) => {
-                                                return (
-                                                    <CardView key={i} handleBookmark={this.handleBookmark} character={character} ></CardView>
-                                                )
-                                            }) }
-                                        </div>
-                        
-                                        <Pagination
-                                            currentPage={this.state.currentPage}
-                                            totalPages={this.state.pagesNumber}
-                                            changeCurrentPage={this.changeCurrentPage}
-                                            theme="square-fill"
-                                        />
+                            <div>
+                                <div className="toolbar">
+                                    <Filter filterCharacters={this.filterCharacters} filters={this.state.filters} removeFilter={this.removeFilter}/>
+                                    <Bookmark characters={this.state.bookmarkArray} handleBookmark={this.handleBookmark}/>
+                                </div>
+                                {this.state.showLoading ? <Loading /> : (
+                                    <div className="characters-content">
+                                        {this.state.charactersArray.map((character, i) => {
+                                            return (
+                                                <CardView key={i} handleBookmark={this.handleBookmark} character={character} ></CardView>
+                                            )
+                                        }) }
                                     </div>
-                                )
-                            }
+                                    )
+                                }
+                                <Pagination
+                                    currentPage={this.state.currentPage}
+                                    totalPages={this.state.pagesNumber}
+                                    changeCurrentPage={this.changeCurrentPage}
+                                    theme="square-fill"
+                                />
+                            </div>
                         </div>
-                    )
-                }
+                )}
             </div>
         )
     }

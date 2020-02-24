@@ -2,18 +2,18 @@ import React from 'react';
 import exit from '../../images/exit.svg';
 
 export const Filter = (props) => {
-
+    let delay = null;
     const handler = (filter, value) => {
         props.filterCharacters(filter, value);
-        // console.log(filter,value);
     }
 
     const handlerInput = (event) => {
         let name = event.target.value;
-        // setTimeout(() => {
+        clearTimeout(delay);
+        delay = setTimeout(() => {
             props.filterCharacters("name", name);
-            // console.log(name);
-        // }, (1500));     
+            console.log(name);
+        }, (1000));     
     }
 
     const removeFilterHandler = (filter) => {

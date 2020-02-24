@@ -16,7 +16,7 @@ export default class CharacterDetailsPage extends React.Component {
                         <h2 className="about__heading">Task</h2>
                         <p className="about__text">
                             Create a React web application for browsing Rick & Morty characters.
-                            The API documentation is located <a href="https://rickandmortyapi.com/documentation"  className="about__link" target="_blank">here</a>.
+                            The API documentation is located <a href="https://rickandmortyapi.com/documentation"  className="about__link" target="_blank" rel="noopener noreferrer">here</a>.
                         </p>
                         <p className="about__text">The web application should have a single grid view, displaying characters as cards.</p>
                         <p className="about__text">

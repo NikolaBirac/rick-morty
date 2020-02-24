@@ -14,7 +14,7 @@ export const Header = (props) => {
                 <li className="nav__link"><NavLink to="/about">About</NavLink></li>
                 <li className="nav__link"><NavLink to="/">Episodes</NavLink></li>
               </div>
-              <li className="nav__link"><a href="www.github.com" target="_blank"><img src={github} alt="logo"  className="nav__icon"></img></a></li>
+              <li className="nav__link"><a href="https://github.com/NikolaBirac/rick-morty" target="_blank" rel="noopener noreferrer"><img src={github} alt="logo" className="nav__icon"></img></a></li>
             </ul>
           </nav>
           <NavLink to="/"><img src={logo} alt="logo" className="logo"></img></NavLink>

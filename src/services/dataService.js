@@ -40,27 +40,31 @@ class CharactersService {
                 return query = query + `${filter.filter}=${filter.value}&`
             })
         } else {
-            // query = `${query}${filters.filter}=${filters.value}`;
-            query = query + filters.filter + '=' + filters.value;
+            query = `${query}${filters[0].filter}=${filters[0].value}`;
         }
         // ?name=rick&status=alive
+
+        // if (query === "") {
+
+        // } else {
+            let pagesNumber;
+            return axios.get(apiURL + `?${query}`)
+            .then(data => {  
+                pagesNumber = data.data.info.pages;
+                return data.data.results
+            })
+            .then(characters => {
+                    let bookmarkedCharacters = this.getBookmarkedCharacters();
+                    return {
+                        characters: characters.map(singleCharacter => {
+                        let bookmarkState = bookmarkedCharacters.some(c => singleCharacter.id === c.id);         
+                        return new Character(singleCharacter.id, singleCharacter.name, singleCharacter.image, bookmarkState);
+                        }), 
+                        pagesNumber: pagesNumber
+                    }
+                });
+        // }
         
-        let pagesNumber;
-        return axios.get(apiURL + `?${query}`)
-        .then(data => {  
-            pagesNumber = data.data.info.pages;
-            return data.data.results
-        })
-        .then(characters => {
-                let bookmarkedCharacters = this.getBookmarkedCharacters();
-                return {
-                    characters: characters.map(singleCharacter => {
-                    let bookmarkState = bookmarkedCharacters.some(c => singleCharacter.id === c.id);         
-                    return new Character(singleCharacter.id, singleCharacter.name, singleCharacter.image, bookmarkState);
-                    }), 
-                    pagesNumber: pagesNumber
-                }
-            });
     }
 
     getBookmarkedCharacters() {
